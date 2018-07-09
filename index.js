@@ -10,8 +10,7 @@ var exec = require('child_process').exec;
 
 var chalk = require('chalk');
 
-var wrench = require('wrench'),
-    util = require('util');
+var util = require('util');
 
 var AdmZip = require('adm-zip');
 
@@ -306,10 +305,6 @@ var fritzSetup = function() {
                                 }
                             }
 
-                            // Recursively chmod the entire sub-tree of a directory
-                            wrench.chmodSyncRecursive(project_dir + '/storage', 0777);
-                            wrench.chmodSyncRecursive(project_dir + '/uploads', 0777);
-
                             require('dotenv').config({
                                 silent: true,
                                 path: project_dir + '/.env'
@@ -319,7 +314,6 @@ var fritzSetup = function() {
                                 if (!fs.existsSync(process.env.FILE_CACHE_PATH)) {
                                     fs.mkdirSync(process.env.FILE_CACHE_PATH);
                                 }
-                                wrench.chmodSyncRecursive(process.env.FILE_CACHE_PATH, 0777);
                             }
 
                             console.log("\n");
