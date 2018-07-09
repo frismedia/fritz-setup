@@ -186,11 +186,18 @@ var fritzSetup = function() {
                     basename = parts[0] + '/base_project';
 
                 entries.forEach(function(entry) {
+                    
+                    if (entry.entryName === basename) {
+                        zip.extractAllTo(project_dir, true);
+                        console.log('copying ' + entry.entryName + ' to ' + project_dir);
+                    }
+                    return;
+                    
                     if (entry.entryName.indexOf(basename) !== -1) {
                         var entryPathParts = entry.entryName.replace(basename + '/', '/').split('/');
                         entryPathParts.pop();
                         zip.extractEntryTo(entry, project_dir + entryPathParts.join('/'), false, true);
-                        console.log('copying ' + entry.entryName);
+                        console.log('copying ' + entry.entryName + ' to ' + project_dir + entryPathParts.join('/'));
                     }
                     else {
                         console.log('skipping ' + entry.entryName);
