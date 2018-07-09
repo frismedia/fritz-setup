@@ -185,14 +185,7 @@ var fritzSetup = function() {
                     parts = entries[0].entryName.split('/'),
                     basename = parts[0] + '/base_project';
 
-                entries.forEach(function(entry) {
-                    
-                    if (entry.entryName === basename) {
-                        zip.extractAllTo(project_dir, true);
-                        console.log('copying ' + entry.entryName + ' to ' + project_dir);
-                    }
-                    return;
-                    
+                entries.forEach(function(entry) {               
                     if (entry.entryName.indexOf(basename) !== -1) {
                         var entryPathParts = entry.entryName.replace(basename + '/', '/').split('/');
                         entryPathParts.pop();
