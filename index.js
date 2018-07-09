@@ -257,7 +257,7 @@ var fritzSetup = function() {
                                 version: latest
                             };
 
-                            fs.writeFile(project_dir + '/vendor/frismedia/info.json', JSON.stringify(versionInfo));
+                            fs.writeFileSync(project_dir + '/vendor/frismedia/info.json', JSON.stringify(versionInfo));
 
                             console.log('Extracting completed.');
                             console.log('Setting up your htaccess and environment file...');
