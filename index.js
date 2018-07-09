@@ -160,6 +160,8 @@ var fritzSetup = function() {
 
         console.log('Downloading latest version of the base project...');
         var tmpFilePath = './tip.zip';
+        var url = 'https://bitbucket.org/'+result.bitbucket_account+'/frismedia_library_2016/get/tip.zip';
+        console.log('Downloading from: ' + url);
         request.get('https://bitbucket.org/'+result.bitbucket_account+'/frismedia_library_2016/get/tip.zip', {
             'auth': {
                 'user': result.bitbucket_username,
@@ -188,10 +190,14 @@ var fritzSetup = function() {
                         var entryPathParts = entry.entryName.replace(basename + '/', '/').split('/');
                         entryPathParts.pop();
                         zip.extractEntryTo(entry, project_dir + entryPathParts.join('/'), false, true);
+                        console.log('copying ' + entry.entryName);
+                    }
+                    else {
+                        console.log('skipping ' + entry.entryName);
                     }
                 });
 
-                fs.unlinkSync(tmpFilePath);
+                //fs.unlinkSync(tmpFilePath);
                 console.log('Extracting completed. Project initiated.');
 
                 console.log('Downloading latest version of the Frismedia Library...');
